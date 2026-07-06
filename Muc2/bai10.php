@@ -9,13 +9,13 @@
     <?php
         $nam = 2012;
         if($nam % 400 === 0){
-            echo "nam " . $nam . " là năm nhuận";
+            echo "năm " . $nam . " là năm nhuận";
         }
         elseif($nam % 100 ===0 && $nam %400 !== 0){
-            echo "nam " . $nam . " không phải là năm nhuận";
+            echo "năm " . $nam . " không phải là năm nhuận";
         }
         elseif($nam % 4 ===0 && $nam %100 !== 0){
-            echo "nam " . $nam . " là năm nhuận";
+            echo "năm " . $nam . " là năm nhuận";
         }
         else{
             echo $nam ." không phải là năm nhuận";
