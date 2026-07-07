@@ -1,212 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Quản lý sinh viên</title>
 </head>
+
 <body>
 
-<?php
+    <?php
 
-$danhSach = [
-    [
-        "ma"=>"SV01",
-        "ten"=>"Nguyen Van A",
-        "tuoi"=>20,
-        "lop"=>"CNTT1",
-        "diem"=>8.5
-    ],
-    [
-        "ma"=>"SV02",
-        "ten"=>"Tran Thi B",
-        "tuoi"=>19,
-        "lop"=>"CNTT2",
-        "diem"=>7
-    ],
-    [
-        "ma"=>"SV03",
-        "ten"=>"Le Van C",
-        "tuoi"=>21,
-        "lop"=>"CNTT1",
-        "diem"=>9
-    ]
-];
+    $danhSach = [
+        [
+            "ma" => "SV01",
+            "ten" => "Nguyễn Văn A",
+            "tuoi" => 20,
+            "lop" => "CNTT1",
+            "diem" => 8.5
+        ],
+        [
+            "ma" => "SV02",
+            "ten" => "Nguyễn Văn B",
+            "tuoi" => 20,
+            "lop" => "CNTT2",
+            "diem" => 8.5
+        ],
+        [
+            "ma" => "SV03",
+            "ten" => "Nguyễn Văn C",
+            "tuoi" => 20,
+            "lop" => "CNTT3",
+            "diem" => 8.5
+        ]
+    ];
 
-echo "<h2>1. Danh sách sinh viên</h2>";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $ma = $_POST["id"];
+        $name = $_POST["name"];
+        $class = $_POST["class"];
+        $age = $_POST["age"];
+        $score = $_POST["score"];
 
-foreach($danhSach as $sv){
-    echo "Mã: ".$sv["ma"]."<br>";
-    echo "Tên: ".$sv["ten"]."<br>";
-    echo "Tuổi: ".$sv["tuoi"]."<br>";
-    echo "Lớp: ".$sv["lop"]."<br>";
-    echo "Điểm: ".$sv["diem"]."<br><br>";
-}
+        $danhSach[] = [
+            "ma" => $ma,
+            "ten" => $name,
+            "lop" => $class,
+            "tuoi" => $age,
+            "diem" => $score
+        ];    
 
-echo "<hr>";
-
-echo "<h2>2. Thêm sinh viên</h2>";
-
-$danhSach[] = [
-    "ma"=>"SV04",
-    "ten"=>"Pham Van D",
-    "tuoi"=>22,
-    "lop"=>"CNTT3",
-    "diem"=>6
-];
-
-foreach($danhSach as $sv){
-    echo $sv["ma"]." - ".$sv["ten"]."<br>";
-}
-
-echo "<hr>";
-
-echo "<h2>3. Sửa thông tin SV02</h2>";
-
-foreach($danhSach as &$sv){
-    if($sv["ma"]=="SV02"){
-        $sv["diem"]=10;
     }
-}
-unset($sv);
 
-foreach($danhSach as $sv){
-    echo $sv["ma"]." : ".$sv["diem"]."<br>";
-}
+    ?>
+    <h2>Thêm sinh viên</h2>
+    <form action="" class = "container" method = "POST">
+        <div class = "mb-3">
+            <label class = "form-label">Mã Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name = "id" class = "form-control">
+        </div>
+        <div class = "mb-3">
+            <label class = "form-label">Tên Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name = "name" class = "form-control">
+        </div>
+        <div class = "mb-3">
+            <label class = "form-label">Tuổi Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name = "age" class = "form-control">
+        </div>
+        <div class = "mb-3">
+            <label class = "form-label">Lớp Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name = "class" class = "form-control">
+        </div>
+        <div class = "mb-3">
+            <label class = "form-label">Điểm Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name = "score" class = "form-control">
+        </div>
+        
+        <button  type = "submit" class = "btn btn-primary">Thêm</button>
+    </form>
 
-echo "<hr>";
+    <h1>Danh sách sinh viên</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã sinh viên</th>
+                <th>Tên sinh viên</th>
+                <th>Tuổi</th>
+                <th>Lớp</th>
+                <th>Điểm</th>
+            </tr>
+        </thead>
 
-echo "<h2>4. Xóa SV03</h2>";
+        <tbody>
+            <!-- <?php
+                    // foreach($danhSach as $sinhVien){
+                    //     echo "
+                    //         <tr>
+                    //             <td>{$sinhVien['ma']}</td>
+                    //             <td>{$sinhVien['ten']}</td>
+                    //             <td>{$sinhVien['tuoi']}</td>
+                    //             <td>{$sinhVien['lop']}</td>
+                    //             <td>{$sinhVien['diem']}</td>
+                    //         </tr>
+                    //     ";
+                    // }
+                    ?> -->
 
-foreach($danhSach as $i=>$sv){
-    if($sv["ma"]=="SV03"){
-        unset($danhSach[$i]);
-    }
-}
+            <?php foreach ($danhSach as $sinhVien) { ?>
+                <tr>
+                    <td><?php echo $sinhVien["ma"]; ?></td>
+                    <td><?php echo $sinhVien["ten"]; ?></td>
+                    <td><?php echo $sinhVien["tuoi"]; ?></td>
+                    <td><?php echo $sinhVien["lop"]; ?></td>
+                    <td><?php echo $sinhVien["diem"]; ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 
-foreach($danhSach as $sv){
-    echo $sv["ma"]."<br>";
-}
-
-echo "<hr>";
-
-echo "<h2>5. Tìm theo mã</h2>";
-
-foreach($danhSach as $sv){
-    if($sv["ma"]=="SV01"){
-        echo "Tìm thấy: ".$sv["ten"];
-    }
-}
-
-echo "<hr>";
-
-echo "<h2>6. Tìm theo tên</h2>";
-
-foreach($danhSach as $sv){
-    if($sv["ten"]=="Pham Van D"){
-        echo "Mã sinh viên: ".$sv["ma"];
-    }
-}
-
-echo "<hr>";
-
-echo "<h2>7. Sinh viên điểm cao nhất</h2>";
-
-$max = $danhSach[array_key_first($danhSach)];
-
-foreach($danhSach as $sv){
-    if($sv["diem"]>$max["diem"]){
-        $max=$sv;
-    }
-}
-
-echo $max["ten"]." - ".$max["diem"];
-
-echo "<hr>";
-
-echo "<h2>8. Điểm trung bình</h2>";
-
-$tong=0;
-
-foreach($danhSach as $sv){
-    $tong += $sv["diem"];
-}
-
-echo $tong/count($danhSach);
-
-echo "<hr>";
-
-echo "<h2>9. Sắp xếp tăng theo điểm</h2>";
-
-$danhSach = array_values($danhSach);
-
-for($i=0;$i<count($danhSach)-1;$i++){
-    for($j=$i+1;$j<count($danhSach);$j++){
-        if($danhSach[$i]["diem"]>$danhSach[$j]["diem"]){
-            $temp=$danhSach[$i];
-            $danhSach[$i]=$danhSach[$j];
-            $danhSach[$j]=$temp;
-        }
-    }
-}
-
-foreach($danhSach as $sv){
-    echo $sv["ten"]." - ".$sv["diem"]."<br>";
-}
-
-echo "<hr>";
-
-echo "<h2>10. Sắp xếp theo tên</h2>";
-
-for($i=0;$i<count($danhSach)-1;$i++){
-    for($j=$i+1;$j<count($danhSach);$j++){
-        if(strcmp($danhSach[$i]["ten"],$danhSach[$j]["ten"])>0){
-            $temp=$danhSach[$i];
-            $danhSach[$i]=$danhSach[$j];
-            $danhSach[$j]=$temp;
-        }
-    }
-}
-
-foreach($danhSach as $sv){
-    echo $sv["ten"]."<br>";
-}
-
-echo "<hr>";
-
-echo "<h2>11. Đếm sinh viên đạt</h2>";
-
-$dem=0;
-
-foreach($danhSach as $sv){
-    if($sv["diem"]>=5){
-        $dem++;
-    }
-}
-
-echo "Có ".$dem." sinh viên đạt.";
-
-echo "<hr>";
-
-echo "<h2>12. Thống kê theo lớp</h2>";
-
-$thongKe=[];
-
-foreach($danhSach as $sv){
-    $lop=$sv["lop"];
-
-    if(isset($thongKe[$lop])){
-        $thongKe[$lop]++;
-    }else{
-        $thongKe[$lop]=1;
-    }
-}
-
-foreach($thongKe as $lop=>$soLuong){
-    echo $lop." : ".$soLuong." sinh viên<br>";
-}
-
-?>
 
 </body>
+
 </html>
