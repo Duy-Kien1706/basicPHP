@@ -36,7 +36,7 @@
         ]
     ];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ma = $_POST["id"];
         $name = $_POST["name"];
         $class = $_POST["class"];
@@ -49,35 +49,47 @@
             "lop" => $class,
             "tuoi" => $age,
             "diem" => $score
-        ];    
-
+        ];
     }
 
     ?>
+
+    <?php
+    if (isset($_GET["delete"])) {
+        $index = $_GET["delete"];
+
+        if (isset($danhSach[$index])) {
+            unset($danhSach[$index]);
+
+            // Đánh lại chỉ số mảng
+            $danhSach = array_values($danhSach);
+        }
+    }
+    ?>
     <h2>Thêm sinh viên</h2>
-    <form action="" class = "container" method = "POST">
-        <div class = "mb-3">
-            <label class = "form-label">Mã Sinh Viên</label>
-            <input type="text" placeholder="Nhập mã sinh viên" name = "id" class = "form-control">
+    <form action="" class="container" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Mã Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name="id" class="form-control">
         </div>
-        <div class = "mb-3">
-            <label class = "form-label">Tên Sinh Viên</label>
-            <input type="text" placeholder="Nhập mã sinh viên" name = "name" class = "form-control">
+        <div class="mb-3">
+            <label class="form-label">Tên Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name="name" class="form-control">
         </div>
-        <div class = "mb-3">
-            <label class = "form-label">Tuổi Sinh Viên</label>
-            <input type="text" placeholder="Nhập mã sinh viên" name = "age" class = "form-control">
+        <div class="mb-3">
+            <label class="form-label">Tuổi Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name="age" class="form-control">
         </div>
-        <div class = "mb-3">
-            <label class = "form-label">Lớp Sinh Viên</label>
-            <input type="text" placeholder="Nhập mã sinh viên" name = "class" class = "form-control">
+        <div class="mb-3">
+            <label class="form-label">Lớp Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name="class" class="form-control">
         </div>
-        <div class = "mb-3">
-            <label class = "form-label">Điểm Sinh Viên</label>
-            <input type="text" placeholder="Nhập mã sinh viên" name = "score" class = "form-control">
+        <div class="mb-3">
+            <label class="form-label">Điểm Sinh Viên</label>
+            <input type="text" placeholder="Nhập mã sinh viên" name="score" class="form-control">
         </div>
-        
-        <button  type = "submit" class = "btn btn-primary">Thêm</button>
+
+        <button type="submit" class="btn btn-primary">Thêm</button>
     </form>
 
     <h1>Danh sách sinh viên</h1>
@@ -89,6 +101,7 @@
                 <th>Tuổi</th>
                 <th>Lớp</th>
                 <th>Điểm</th>
+                <th>Hành động</th>
             </tr>
         </thead>
 
@@ -107,7 +120,7 @@
                     // }
                     ?> -->
 
-            <?php foreach ($danhSach as $sinhVien) { ?>
+            <?php foreach ($danhSach as $index => $sinhVien) { ?>
                 <tr>
                     <td><?php echo $sinhVien["ma"]; ?></td>
                     <td><?php echo $sinhVien["ten"]; ?></td>
